@@ -154,7 +154,7 @@ function ContactPage() {
                     name="message"
                     rows={4}
                     placeholder=" "
-                    aria-invalid={Boolean(errors.message)}
+                    aria-invalid={Boolean(errors["message"])}
                     className="peer w-full resize-none border-b border-gold/25 bg-transparent pt-6 pb-2 font-sans text-base text-ivory focus:border-gold focus:outline-none"
                   />
                   <label
@@ -163,8 +163,8 @@ function ContactPage() {
                   >
                     What are you looking for?
                   </label>
-                  {errors.message && (
-                    <p className="mt-2 font-sans text-xs text-rose-gold">{errors.message}</p>
+                  {errors["message"] && (
+                    <p className="mt-2 font-sans text-xs text-rose-gold">{errors["message"]}</p>
                   )}
                 </div>
               </div>
