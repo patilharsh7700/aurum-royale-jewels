@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CraftsmanshipRouteImport } from './routes/craftsmanship'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const CraftsmanshipRoute = CraftsmanshipRouteImport.update({
   path: '/craftsmanship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,14 +70,33 @@ export interface FileRoutesById {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/collections' | '/contact' | '/craftsmanship'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/collections'
+    | '/contact'
+    | '/craftsmanship'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/collections' | '/contact' | '/craftsmanship'
+  to:
+    | '/'
+    | '/about'
+    | '/collections'
+    | '/contact'
+    | '/craftsmanship'
+    | '/sitemap.xml'
   id:
-    '__root__' | '/' | '/about' | '/collections' | '/contact' | '/craftsmanship'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/collections'
+    | '/contact'
+    | '/craftsmanship'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -78,6 +105,7 @@ export interface RootRouteChildren {
   CollectionsRoute: typeof CollectionsRoute
   ContactRoute: typeof ContactRoute
   CraftsmanshipRoute: typeof CraftsmanshipRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CraftsmanshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -126,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsRoute: CollectionsRoute,
   ContactRoute: ContactRoute,
   CraftsmanshipRoute: CraftsmanshipRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
