@@ -8,6 +8,7 @@ const columns = [
     links: [
       { label: "Our Story", to: "/about" },
       { label: "Craftsmanship", to: "/craftsmanship" },
+      { label: "The Journal", to: "/journal" },
       { label: "Boutiques", to: "/contact" },
     ],
   },
