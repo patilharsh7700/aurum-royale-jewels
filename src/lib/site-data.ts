@@ -3,6 +3,7 @@ export const NAV = [
   { label: "Collections", to: "/collections" },
   { label: "Craftsmanship", to: "/craftsmanship" },
   { label: "Maison", to: "/about" },
+  { label: "Journal", to: "/journal" },
   { label: "Contact", to: "/contact" },
 ] as const;
 
@@ -123,22 +124,49 @@ export const TESTIMONIALS = [
 
 export const JOURNAL = [
   {
+    slug: "reading-a-diamond-certificate",
     tag: "Gemmology",
     title: "Reading a diamond certificate like a gemmologist",
     read: "6 min",
     date: "12 July 2026",
+    excerpt:
+      "Cut grade, fluorescence, table percentage — the four numbers on a GIA report that decide whether a stone sings or sleeps.",
+    body: [
+      "Most buyers read a certificate from the top down: carat, colour, clarity, and then stop. A gemmologist reads it from the middle out — beginning with the proportions diagram, because cut is the only one of the four Cs that is entirely the work of human hands.",
+      "A table percentage between 54 and 57, a depth of 61 to 62.3, and a crown angle near 34.5 degrees are the quiet indicators of a stone that will return light rather than leak it. Two diamonds with identical colour and clarity grades can differ by thirty percent in brilliance on these numbers alone.",
+      "Fluorescence is the most misread line on the page. Faint to medium blue fluorescence in a J or K colour stone often improves its face-up appearance and costs materially less. Strong fluorescence in a D to F stone is where caution belongs.",
+      "Finally, check that the girdle inscription matches the report number under a loupe. Every Aurum Royale diamond above 0.30ct is inscribed, photographed at the bench, and delivered with its original laboratory report issued in your name.",
+    ],
   },
   {
+    slug: "nakashi-repousse-temple-gold",
     tag: "Heritage",
     title: "Nakashi: the vanishing art of repoussé temple gold",
     read: "9 min",
     date: "28 June 2026",
+    excerpt:
+      "Eleven weeks, a bed of lac, and a hundred blunt punches: how a flat sheet of 22K becomes a goddess in relief.",
+    body: [
+      "Nakashi is the craft of raising a figure out of a flat sheet of gold by striking it from behind. The sheet is laid on a warm bed of lac — a resin that yields under the punch and holds the form when it cools — and worked from both sides over many weeks.",
+      "Our senior nakashi artisans in Coimbatore begin with a charcoal drawing taken from temple gopuram sculpture, then raise the volume in four passes: the mass, the limbs, the drapery, and finally the face, which is always struck last and always by the same hand.",
+      "A single Meenakshi pendant of the kind that anchors our temple harams takes between nine and twelve weeks. Nothing is cast, nothing is CNC-cut, and no two are identical — the tool marks on the reverse are effectively a signature.",
+      "Fewer than two hundred artisans in India still work at this level. Every haram we sell funds an apprentice year at the bench, because a craft that is not taught is a craft that is already gone.",
+    ],
   },
   {
+    slug: "building-a-trousseau-in-four-acts",
     tag: "Bridal",
     title: "Building a trousseau in four acts, not four days",
     read: "7 min",
     date: "05 June 2026",
+    excerpt:
+      "A bridal wardrobe assembled over twelve months costs less, fits better, and carries further than one bought in a panic.",
+    body: [
+      "The first act is the anchor: one ceremonial piece — a polki choker or a temple haram — chosen twelve to fourteen months out, because uncut polki of matched colour takes that long to source honestly.",
+      "The second act is the everyday: a solitaire, a pair of studs, a slim bangle stack. These are worn for decades, so they are bought on cut and comfort rather than on carat.",
+      "The third act is the ritual set — mangalsutra, kamarbandh, jhumkas — commissioned once the outfits are finalised, so metal tone and stone colour answer the fabric rather than fight it.",
+      "The fourth act is the inheritance: a single unhurried commission made after the wedding, from stones already in the family. It is the piece your daughter will describe to a jeweller from a photograph one day.",
+    ],
   },
 ] as const;
 
