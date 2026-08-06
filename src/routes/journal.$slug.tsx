@@ -96,7 +96,7 @@ function ArticlePage() {
           <p className="font-serif text-2xl leading-relaxed text-gold/85">{article.excerpt}</p>
           <div className="hairline my-12 opacity-40" />
           <div className="space-y-8">
-            {article.body.map((p) => (
+            {article.body.map((p: string) => (
               <Reveal key={p.slice(0, 24)}>
                 <p className="font-sans text-base leading-[1.9] text-ivory/70">{p}</p>
               </Reveal>
