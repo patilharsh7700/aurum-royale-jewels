@@ -507,18 +507,28 @@ function Journal() {
       <div className="mt-14 grid gap-px border border-gold/12 bg-gold/12 lg:grid-cols-3">
         {JOURNAL.map((j, i) => (
           <Reveal key={j.title} delay={i * 100}>
-            <article className="group h-full bg-background p-10 transition-colors duration-700 hover:bg-card">
+            <Link
+              to="/journal/$slug"
+              params={{ slug: j.slug }}
+              className="group flex h-full flex-col bg-background p-10 transition-colors duration-700 hover:bg-card"
+            >
               <p className="font-sans text-[0.55rem] tracking-[0.3em] text-gold uppercase">
                 {j.tag}
               </p>
               <h3 className="mt-6 font-display text-3xl leading-snug text-ivory">{j.title}</h3>
-              <p className="mt-8 font-sans text-[0.68rem] tracking-[0.18em] text-ivory/40 uppercase">
+              <p className="mt-6 font-sans text-sm leading-relaxed text-ivory/55">{j.excerpt}</p>
+              <p className="mt-auto pt-8 font-sans text-[0.68rem] tracking-[0.18em] text-ivory/40 uppercase">
                 {j.date} · {j.read}
               </p>
               <span className="mt-6 inline-block h-px w-10 bg-gold/40 transition-all duration-700 group-hover:w-24 group-hover:bg-gold" />
-            </article>
+            </Link>
           </Reveal>
         ))}
+      </div>
+      <div className="mt-14">
+        <MagneticButton to="/journal" variant="ghost">
+          Read the journal
+        </MagneticButton>
       </div>
     </section>
   );
