@@ -14,7 +14,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CraftsmanshipRouteImport } from './routes/craftsmanship'
+import { Route as JournalRouteImport } from './routes/journal'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,10 +43,20 @@ const CraftsmanshipRoute = CraftsmanshipRouteImport.update({
   path: '/craftsmanship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
+} as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => JournalRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -53,7 +65,9 @@ export interface FileRoutesByFullPath {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/journal/$slug': typeof JournalSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +75,9 @@ export interface FileRoutesByTo {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/journal/$slug': typeof JournalSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,7 +86,9 @@ export interface FileRoutesById {
   '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/craftsmanship': typeof CraftsmanshipRoute
+  '/journal': typeof JournalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/journal/$slug': typeof JournalSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -80,7 +98,9 @@ export interface FileRouteTypes {
     | '/collections'
     | '/contact'
     | '/craftsmanship'
+    | '/journal'
     | '/sitemap.xml'
+    | '/journal/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -88,7 +108,9 @@ export interface FileRouteTypes {
     | '/collections'
     | '/contact'
     | '/craftsmanship'
+    | '/journal'
     | '/sitemap.xml'
+    | '/journal/$slug'
   id:
     | '__root__'
     | '/'
@@ -96,7 +118,9 @@ export interface FileRouteTypes {
     | '/collections'
     | '/contact'
     | '/craftsmanship'
+    | '/journal'
     | '/sitemap.xml'
+    | '/journal/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +129,7 @@ export interface RootRouteChildren {
   CollectionsRoute: typeof CollectionsRoute
   ContactRoute: typeof ContactRoute
   CraftsmanshipRoute: typeof CraftsmanshipRoute
+  JournalRoute: typeof JournalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -145,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CraftsmanshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -152,8 +184,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof JournalRoute
+    }
   }
 }
+
+interface JournalRouteChildren {
+  JournalSlugRoute: typeof JournalSlugRoute
+}
+
+const JournalRouteChildren: JournalRouteChildren = {
+  JournalSlugRoute: JournalSlugRoute,
+}
+
+const JournalRouteWithChildren =
+  JournalRoute._addFileChildren(JournalRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -161,18 +211,9 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsRoute: CollectionsRoute,
   ContactRoute: ContactRoute,
   CraftsmanshipRoute: CraftsmanshipRoute,
+  JournalRoute: JournalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
